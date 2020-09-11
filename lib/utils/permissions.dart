@@ -18,10 +18,10 @@ class Permissions {
   static Future<PermissionStatus> _getCameraPermission() async {
     PermissionStatus permission = await Permission.camera.status;
     if (permission != PermissionStatus.granted &&
-        permission != PermissionStatus.denied) {
+        permission != PermissionStatus.permanentlyDenied) {
       Map<Permission, PermissionStatus> permissionStatus = await [Permission.camera].request();
       return permissionStatus[Permission.camera] ??
-          PermissionStatus.undetermined;
+          Permission.unknown;
     } else {
       return permission;
     }
@@ -30,11 +30,11 @@ class Permissions {
   static Future<PermissionStatus> _getMicrophonePermission() async {
     PermissionStatus permission = await Permission.microphone.status;
     if (permission != PermissionStatus.granted &&
-        permission != PermissionStatus.denied) {
+        permission != PermissionStatus.permanentlyDenied) {
       Map<Permission, PermissionStatus> permissionStatus =
       await [Permission.microphone].request();
       return permissionStatus[Permission.microphone] ??
-          PermissionStatus.undetermined;
+          Permission.unknown;
     } else {
       return permission;
     }

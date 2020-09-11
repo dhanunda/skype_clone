@@ -357,13 +357,13 @@ class _CallScreenState extends State<CallScreen> {
   }
 
   @override
-  void dispose() {
+  void dispose() async{
     // clear users
     _users.clear();
     // destroy sdk
-    AgoraRtcEngine.leaveChannel();
-    AgoraRtcEngine.destroy();
-    callStreamSubscription.cancel();
+    await AgoraRtcEngine.leaveChannel();
+    await AgoraRtcEngine.destroy();
+    await callStreamSubscription.cancel();
     super.dispose();
   }
 
